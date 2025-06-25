@@ -1,0 +1,16 @@
+[project]
+name = "unified-creek-awos"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "astral>=3.2",
+    "matplotlib>=3.10.3",
+    "numpy>=2.2.6",
+    "pandas>=2.2.3",
+    "pillow>=11.2.1",
+    "pymodbus>=3.9.2",
+    "pyserial>=3.5",
+    "screeninfo>=0.8.1",
+]
