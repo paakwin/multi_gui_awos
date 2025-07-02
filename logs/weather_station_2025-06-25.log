@@ -1,0 +1,267 @@
+2025-06-25 10:01:35,054 - INFO - Weather Station System Initialized
+2025-06-25 10:01:35,432 - ERROR - Failed to connect to Modbus
+2025-06-25 10:01:35,441 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 10:01:35,442 - ERROR - Modbus connection failed
+2025-06-25 10:01:36,442 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 10:01:37,442 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 10:01:38,443 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 10:01:39,443 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 10:01:40,442 - ERROR - Modbus connection failed
+2025-06-25 10:01:40,443 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 10:01:40,698 - INFO - Shutting down weather station system
+2025-06-25 10:23:20,565 - INFO - Weather Station System Initialized
+2025-06-25 10:23:20,880 - ERROR - Failed to connect to Modbus
+2025-06-25 10:23:20,881 - ERROR - Modbus connection failed
+2025-06-25 10:23:20,881 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 10:23:21,882 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 10:23:22,882 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 10:23:22,956 - INFO - Shutting down weather station system
+2025-06-25 10:23:33,410 - INFO - Weather Station System Initialized
+2025-06-25 10:23:33,720 - ERROR - Failed to connect to Modbus
+2025-06-25 10:23:33,721 - ERROR - Modbus connection failed
+2025-06-25 10:23:33,721 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 10:23:34,721 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 10:23:35,469 - INFO - Shutting down weather station system
+2025-06-25 20:37:02,864 - INFO - Data Manager Initialized
+2025-06-25 20:37:02,865 - ERROR - Failed to connect to Modbus
+2025-06-25 20:37:02,902 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:02,902 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:02,903 - INFO - UV: 0.00
+2025-06-25 20:37:02,904 - ERROR - Error checking display time: 'GUIManager' object has no attribute 'log'
+2025-06-25 20:37:03,010 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:03,010 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:03,010 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:03,011 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:03,011 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:04,011 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:04,012 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:04,012 - INFO - UV: 0.00
+2025-06-25 20:37:04,087 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:04,088 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:04,088 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:04,089 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:04,090 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:05,090 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:05,090 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:05,090 - INFO - UV: 0.00
+2025-06-25 20:37:05,139 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:05,139 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:05,139 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:05,140 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:05,140 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:06,141 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:06,141 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:06,141 - INFO - UV: 0.00
+2025-06-25 20:37:06,194 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:06,195 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:06,195 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:06,195 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:06,195 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:07,196 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:07,196 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:07,196 - INFO - UV: 0.00
+2025-06-25 20:37:07,248 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:07,249 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:07,249 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:07,249 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:07,249 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:07,905 - ERROR - Error checking display time: 'GUIManager' object has no attribute 'log'
+2025-06-25 20:37:08,250 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:08,250 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:08,250 - INFO - UV: 0.00
+2025-06-25 20:37:08,303 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:08,304 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:08,304 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:08,304 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:08,304 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:09,305 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:09,305 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:09,305 - INFO - UV: 0.00
+2025-06-25 20:37:09,362 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:09,362 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:09,362 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:09,362 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:09,363 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:10,363 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:10,363 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:10,363 - INFO - UV: 0.00
+2025-06-25 20:37:10,411 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:10,411 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:10,411 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:10,412 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:10,412 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:11,412 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:11,412 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:11,412 - INFO - UV: 0.00
+2025-06-25 20:37:11,461 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:11,462 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:11,462 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:11,462 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:11,462 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:12,462 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:12,463 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:12,463 - INFO - UV: 0.00
+2025-06-25 20:37:12,511 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:12,512 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:12,512 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:12,512 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:12,512 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:12,906 - ERROR - Error checking display time: 'GUIManager' object has no attribute 'log'
+2025-06-25 20:37:13,512 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:13,513 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:13,513 - INFO - UV: 0.00
+2025-06-25 20:37:13,563 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:13,563 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:13,563 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:13,563 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:13,563 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:14,564 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:14,565 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:14,565 - INFO - UV: 0.00
+2025-06-25 20:37:14,634 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:14,635 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:14,635 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:14,635 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:14,635 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:15,636 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:15,636 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:15,636 - INFO - UV: 0.00
+2025-06-25 20:37:15,691 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:15,692 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:15,692 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:15,692 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:15,693 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:16,693 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:16,694 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:16,694 - INFO - UV: 0.00
+2025-06-25 20:37:16,742 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:16,742 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:16,742 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:16,743 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:16,743 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:17,743 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:17,743 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:17,743 - INFO - UV: 0.00
+2025-06-25 20:37:17,791 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:17,792 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:17,792 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:17,792 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:17,792 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:17,907 - ERROR - Error checking display time: 'GUIManager' object has no attribute 'log'
+2025-06-25 20:37:18,792 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:18,793 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:18,793 - INFO - UV: 0.00
+2025-06-25 20:37:18,840 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:18,841 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:18,841 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:18,841 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:18,841 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:19,842 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:19,842 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:19,842 - INFO - UV: 0.00
+2025-06-25 20:37:19,915 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:19,916 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:19,916 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:19,916 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:19,916 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:20,917 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:20,917 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:20,917 - INFO - UV: 0.00
+2025-06-25 20:37:20,969 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:20,969 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:20,969 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:20,969 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:20,969 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:21,970 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:21,970 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:21,970 - INFO - UV: 0.00
+2025-06-25 20:37:22,018 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:22,019 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:22,019 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:22,019 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:22,019 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:22,908 - ERROR - Error checking display time: 'GUIManager' object has no attribute 'log'
+2025-06-25 20:37:23,020 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:23,020 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:23,020 - INFO - UV: 0.00
+2025-06-25 20:37:23,067 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:23,067 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:23,067 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:23,067 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:23,068 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:24,068 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:24,068 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:24,068 - INFO - UV: 0.00
+2025-06-25 20:37:24,120 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:24,121 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:24,121 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:24,121 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:24,121 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:25,122 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:25,122 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:25,122 - INFO - UV: 0.00
+2025-06-25 20:37:25,191 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:25,192 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:25,192 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:25,192 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:25,192 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:26,194 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:26,195 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:26,195 - INFO - UV: 0.00
+2025-06-25 20:37:26,268 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:26,268 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:26,269 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:26,269 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:26,269 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:27,269 - ERROR - Environment sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:27,270 - ERROR - UV sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:27,270 - INFO - UV: 0.00
+2025-06-25 20:37:27,317 - INFO - AQI Sensor Data: {'co2': nan, 'pm2_5': 23.4, 'pm10': 80.8, 'carbon_monoxide': 202.0, 'nitrogen_dioxide': 19.2, 'sulphur_dioxide': 5.6, 'ozone': 39.0}
+2025-06-25 20:37:27,318 - ERROR - Wind speed sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:27,318 - INFO - Wind Speed: 0.0 m/s
+2025-06-25 20:37:27,318 - ERROR - Wind direction sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:37:27,319 - ERROR - Rainfall sensor error: Modbus Error: [Connection] Failed to connect[ModbusSerialClient /dev/ttyUSB0:0]
+2025-06-25 20:44:25,885 - INFO - Data Manager Initialized
+2025-06-25 20:44:25,886 - WARNING - Failed to connect to Modbus, using placeholder data
+2025-06-25 20:44:25,922 - INFO - Switching to Night display
+2025-06-25 20:44:25,924 - ERROR - Background image not found at: /home/asif/Desktop/multi_gui_awos/images/night_blank.png
+2025-06-25 20:44:25,925 - ERROR - Failed to load background image: Background image not found: /home/asif/Desktop/multi_gui_awos/images/night_blank.png
+2025-06-25 20:44:25,925 - ERROR - Error checking display time: Background image not found: /home/asif/Desktop/multi_gui_awos/images/night_blank.png
+2025-06-25 20:47:28,730 - INFO - Data Manager Initialized
+2025-06-25 20:47:28,731 - WARNING - Failed to connect to Modbus, using placeholder data
+2025-06-25 20:47:28,762 - INFO - Switching to Night display
+2025-06-25 20:47:29,179 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 20:47:30,233 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 20:47:31,233 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 20:47:32,234 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 20:47:33,234 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 20:47:34,235 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 20:47:34,751 - INFO - Shutting down display night
+2025-06-25 20:47:59,294 - INFO - Removed old CSV file: weather_data_2025-05-25.csv
+2025-06-25 20:47:59,294 - INFO - Removed old CSV file: weather_data_2025-05-26.csv
+2025-06-25 20:47:59,294 - INFO - Removed old CSV file: weather_data_2025-05-27.csv
+2025-06-25 20:47:59,294 - INFO - Removed old CSV file: weather_data_2025-05-31.csv
+2025-06-25 20:48:04,935 - INFO - Data Manager Initialized
+2025-06-25 20:48:04,936 - WARNING - Failed to connect to Modbus, using placeholder data
+2025-06-25 20:48:04,966 - INFO - Switching to Night display
+2025-06-25 20:48:05,302 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 20:48:06,341 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 20:48:07,342 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 20:48:08,342 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 20:48:09,342 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 20:48:10,343 - ERROR - Display update error: unsupported operand type(s) for *: 'NoneType' and 'float'
+2025-06-25 20:48:10,540 - INFO - Shutting down display night
+2025-06-25 11:51:31,273 - INFO - Data Manager Initialized
+2025-06-25 11:51:31,274 - WARNING - Failed to connect to Modbus, using placeholder data
+2025-06-25 11:51:31,314 - INFO - Switching to day1 display
+2025-06-25 11:51:31,320 - ERROR - Background image not found at: /home/asif/Desktop/multi_gui_awos/images/day1_blank.png
+2025-06-25 11:51:31,320 - ERROR - Failed to load background image: Background image not found: /home/asif/Desktop/multi_gui_awos/images/day1_blank.png
+2025-06-25 11:51:31,320 - ERROR - Error checking display time: Background image not found: /home/asif/Desktop/multi_gui_awos/images/day1_blank.png
+2025-06-25 11:56:31,394 - INFO - Switching to day2 display
+2025-06-25 11:56:31,394 - ERROR - Background image not found at: /home/asif/Desktop/multi_gui_awos/images/day2_blank.png
+2025-06-25 11:56:31,394 - ERROR - Failed to load background image: Background image not found: /home/asif/Desktop/multi_gui_awos/images/day2_blank.png
+2025-06-25 11:56:31,394 - ERROR - Error checking display time: Background image not found: /home/asif/Desktop/multi_gui_awos/images/day2_blank.png
+2025-06-25 12:01:31,482 - INFO - Switching to day1 display
+2025-06-25 12:01:31,482 - ERROR - Background image not found at: /home/asif/Desktop/multi_gui_awos/images/day1_blank.png
+2025-06-25 12:01:31,482 - ERROR - Failed to load background image: Background image not found: /home/asif/Desktop/multi_gui_awos/images/day1_blank.png
+2025-06-25 12:01:31,482 - ERROR - Error checking display time: Background image not found: /home/asif/Desktop/multi_gui_awos/images/day1_blank.png
