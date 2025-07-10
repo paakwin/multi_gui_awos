@@ -366,3 +366,41 @@
 2025-07-10 12:45:31,932 - INFO - Manually switched to GUI-1
 2025-07-10 12:45:34,276 - INFO - Shutting down weather station system
 2025-07-10 12:45:36,276 - INFO - Cleanup completed, exiting application
+2025-07-10 12:49:06,131 - INFO - Weather Station System Initialized
+2025-07-10 12:49:14,015 - ERROR - Modbus connection failed
+2025-07-10 12:49:14,016 - ERROR - Error updating display: 'day'
+2025-07-10 12:49:24,018 - INFO - Switched to GUI-2
+2025-07-10 12:49:27,897 - INFO - Shutting down weather station system
+2025-07-10 12:49:29,017 - INFO - Cleanup completed, exiting application
+2025-07-10 12:51:27,410 - INFO - Weather Station System Initialized
+2025-07-10 12:51:35,469 - ERROR - Modbus connection failed
+2025-07-10 12:51:35,470 - ERROR - Error updating display: 'day'
+2025-07-10 12:51:45,472 - INFO - Switched to GUI-2
+2025-07-10 12:51:55,472 - INFO - Switched to GUI-1
+2025-07-10 12:51:59,138 - INFO - Shutting down weather station system
+2025-07-10 12:52:00,472 - INFO - Cleanup completed, exiting application
+2025-07-10 12:56:37,840 - INFO - Weather Station System Initialized
+2025-07-10 12:56:45,681 - ERROR - Modbus connection failed
+2025-07-10 12:56:45,682 - ERROR - Error updating display: 'day'
+2025-07-10 12:56:55,684 - INFO - Switched to GUI-2
+2025-07-10 12:56:57,930 - INFO - Shutting down weather station system
+2025-07-10 12:56:59,930 - INFO - Cleanup completed, exiting application
+2025-07-10 12:59:22,807 - INFO - Weather Station System Initialized
+2025-07-10 12:59:30,685 - ERROR - Modbus connection failed
+2025-07-10 12:59:30,686 - ERROR - Error updating display: 'day'
+2025-07-10 12:59:40,687 - INFO - Switched to GUI-2
+2025-07-10 12:59:42,531 - INFO - Manually switched to GUI-1
+2025-07-10 12:59:43,235 - INFO - Display paused on GUI-1
+2025-07-10 13:01:20,578 - INFO - Weather Station System Initialized
+2025-07-10 13:01:25,194 - INFO - Weather Station System Initialized
+2025-07-10 13:01:33,069 - ERROR - Modbus connection failed
+2025-07-10 13:01:33,071 - ERROR - Error updating display: 'day'
+2025-07-10 13:01:43,072 - INFO - Switched to GUI-2
+2025-07-10 13:01:47,266 - INFO - Shutting down weather station system
+2025-07-10 13:01:48,072 - INFO - Cleanup completed, exiting application
+2025-07-10 13:03:40,580 - INFO - Weather Station System Initialized
+2025-07-10 13:03:48,411 - ERROR - Modbus connection failed
+2025-07-10 13:03:48,412 - ERROR - Error updating display: 'day'
+2025-07-10 13:03:58,413 - INFO - Switched to GUI-2
+2025-07-10 13:04:03,762 - INFO - Manually switched to GUI-1
+2025-07-10 13:04:05,218 - INFO - Display paused on GUI-1

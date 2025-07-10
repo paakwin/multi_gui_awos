@@ -304,6 +304,60 @@ class WeatherStationSystem:
         # Create widgets for both GUIs
         self.create_display_widgets()
 
+    def init_sensor_config(self) -> None:
+        """Set up sensor parsing configurations."""
+        self.sensor_configs = {
+            'temperature': {
+                'parser': lambda data: data.get('temperature'),
+                'display_format': lambda v: f"{v:.1f}" if v is not None else "37.5",
+                'widget': 'temperature_value',
+                'size': 100
+            },
+            'humidity': {
+                'parser': lambda data: data.get('humidity'),
+                'display_format': lambda v: f"{v:.1f} %" if v is not None else "100 %",  # Added space before %
+                'widget': 'humidity_value',
+                'size': 100
+            },
+            'wind_speed': {
+                'parser': lambda data: data.get('wind_speed', 0.0) * 3.6 if data.get('wind_speed') is not None else None,
+                'display_format': lambda v: f"{v:.1f}" if v is not None else "25.0",
+                'widget': 'wind_speed_value',
+                'size': 80
+            },
+            'wind_direction': {
+                'parser': lambda data: data.get('wind_dir_degrees'),
+                'display_format': lambda v: f"{v}°" if v is not None else "360",
+                'widget': 'wind_direction_value',
+                'size': 80
+            },
+            'pressure': {
+                'parser': lambda data: data.get('pressure'),
+                'display_format': lambda v: f"{v:.1f}" if v is not None else "PS",
+                'widget': 'pressure_value',
+                'size': 100
+            },
+            'rain': {
+                'parser': lambda data: self.process_rainfall(data.get('rainfall')),
+                'display_format': lambda v: f"{v:.1f}" if v is not None else "RF",
+                'widget': 'rain_value',
+                'size': 80
+            },
+            'uv': {
+                'parser': lambda data: data.get('uv_index'),
+                'display_format': lambda v: f"{v:.2f}" if v is not None else "UV",
+                'widget': 'uv_value',
+                'size': 100
+            },
+            'aqi': {
+                'parser': lambda data: self.calculate_aqi(data.get('pm2_5')),
+                'display_format': lambda v: f"{v:.0f}" if v is not None else "AQI",
+                'widget': 'aqi_value',
+                'size': 100
+            }
+        }
+
+
     def create_display_widgets(self) -> None:
         """Create and configure all display widgets."""
         # Define all widget configurations in one place
@@ -342,11 +396,11 @@ class WeatherStationSystem:
                     'placeholder': '32.5'
                 },
                 'humidity': {
-                    'size': 100,
-                    'color': '#FFFFFF',
-                    'position': (980, 250),
+                    'size': 170,
+                    'color': "#10FD08",
+                    'position': (1500, 350),
                     'anchor': 'center',
-                    'placeholder': 'HM'
+                    'placeholder': '100%'
                 },
                 'wind_speed': {
                     'size': 100,
@@ -603,58 +657,6 @@ class WeatherStationSystem:
             self.log("Modbus connection failed", logging.ERROR)
 
 
-    def init_sensor_config(self) -> None:
-        """Set up sensor parsing configurations."""
-        self.sensor_configs = {
-            'temperature': {
-                'parser': lambda data: data.get('temperature'),
-                'display_format': lambda v: f"{v:.1f}" if v is not None else "37.5",
-                'widget': 'temperature_value',
-                'size': 100
-            },
-            'humidity': {
-                'parser': lambda data: data.get('humidity'),
-                'display_format': lambda v: f"{v:.1f}%" if v is not None else "100",
-                'widget': 'humidity_value',
-                'size': 100
-            },
-            'wind_speed': {
-                'parser': lambda data: data.get('wind_speed', 0.0) * 3.6 if data.get('wind_speed') is not None else None,
-                'display_format': lambda v: f"{v:.1f}" if v is not None else "25.0",
-                'widget': 'wind_speed_value',
-                'size': 80
-            },
-            'wind_direction': {
-                'parser': lambda data: data.get('wind_dir_degrees'),
-                'display_format': lambda v: f"{v}°" if v is not None else "360",
-                'widget': 'wind_direction_value',
-                'size': 80
-            },
-            'pressure': {
-                'parser': lambda data: data.get('pressure'),
-                'display_format': lambda v: f"{v:.1f}" if v is not None else "PS",
-                'widget': 'pressure_value',
-                'size': 100
-            },
-            'rain': {
-                'parser': lambda data: self.process_rainfall(data.get('rainfall')),
-                'display_format': lambda v: f"{v:.1f}" if v is not None else "RF",
-                'widget': 'rain_value',
-                'size': 80
-            },
-            'uv': {
-                'parser': lambda data: data.get('uv_index'),
-                'display_format': lambda v: f"{v:.2f}" if v is not None else "UV",
-                'widget': 'uv_value',
-                'size': 100
-            },
-            'aqi': {
-                'parser': lambda data: self.calculate_aqi(data.get('pm2_5')),
-                'display_format': lambda v: f"{v:.0f}" if v is not None else "AQI",
-                'widget': 'aqi_value',
-                'size': 100
-            }
-        }
 
     def read_environment_sensor(self) -> dict:
         """Read temperature, humidity, and pressure."""
