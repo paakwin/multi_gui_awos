@@ -1,74 +1,156 @@
-# Unified Creek AWOS
+# Weather Station Dashboard System  
 
-A comprehensive weather station and dashboard system implemented in Python using Tkinter, Modbus RTU, and multi-threading. Displays real-time environmental data and logs it reliably.
+**A Python-based dual-GUI weather monitoring system with Modbus sensor integration, real-time data visualization, and logging.**  
 
-## 🌞 Features
+---
 
-### Main Components
+## Table of Contents  
+1. [Overview](#overview)  
+2. [Features](#features)  
+3. [System Architecture](#system-architecture)  
+4. [Installation](#installation)  
+5. [Configuration](#configuration)  
+6. [Usage](#usage)  
+7. [Function Categories](#function-categories)  
+8. [Key Bindings](#key-bindings)  
+9. [License](#license)  
 
-- **Full-screen Dashboard** built with Tkinter
-- Displays Temperature, Humidity, Pressure, UV Index, AQI, Wind Speed/Direction, and Rainfall
-- Supports background images and precise widget positioning
+---
 
-### Sensor Integration
+## Overview  
+This project provides a **full-screen weather dashboard** with two interchangeable GUI views:  
+- **GUI-1**: Basic metrics (temperature, humidity, wind speed/direction).  
+- **GUI-2**: Advanced metrics (UV index, AQI, rainfall, sunrise/sunset).  
 
-- Uses Modbus RTU for sensor communication (Environment, UV, AQI, Wind, Rain)
+Data is collected from Modbus sensors, processed, and displayed in real-time. The system supports automatic GUI switching, manual overrides, and robust logging.  
 
-### Data Management
+---
 
-- Real-time data collection and display
-- CSV logging with daily file rotation and 7-day retention
-- State indicators with color coding
+## Features  
+✅ **Dual-GUI Interface**: Toggle between simplified and detailed views.  
+✅ **Modbus Sensor Integration**: Supports temperature, humidity, wind, rain, and UV sensors.  
+✅ **AQI Calculation**: Converts PM2.5 readings to AQI with color-coded alerts.  
+✅ **Sunrise/Sunset Times**: Pulls data from a CSV for accurate daylight tracking.  
+✅ **Data Logging**: Stores sensor data in CSV files (with auto-cleanup).  
+✅ **Debug Tools**: Coordinate mapping mode (`<F12>`) for GUI alignment.  
 
-### Special Features
+---
 
-- Offline sunrise/sunset times from a CSV file
-- Coordinate mapping mode for layout debugging
-- Automatic rain gauge reset logic after 12 hours of no significant activity
+## System Architecture  
+```mermaid  
+graph LR  
+  A[Modbus Sensors] --> B[Python Backend]  
+  B --> C[(CSV Data Logs)]  
+  B --> D[Tkinter GUI]  
+  D --> E[GUI-1: Basic Metrics]  
+  D --> F[GUI-2: Advanced Metrics]  
+```  
 
-### Technical Details
+---
 
-- Modbus RTU protocol for sensor connectivity
-- Threading for concurrent sensor reading and CSV writing
-- INI-based configuration for easy customization
-- Keyboard shortcuts:
-  - `F5`: Force display refresh
-  - `F12`: Toggle coordinate mapping mode
-  - `Escape`: Shutdown
+## Installation  
+1. **Prerequisites**:  
+   - Python 3.8+  
+   - Libraries: `pymodbus`, `Pillow`, `pandas`, `tkinter`  
+   ```sh  
+   pip install pymodbus pillow pandas  
+   ```  
 
-## 🚀 Getting Started
+2. **Clone the Repository**:  
+   ```sh  
+   git clone https://github.com/your-repo/weather-station.git  
+   cd weather-station  
+   ```  
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/paakwin/unified_creek_awos.git
-   ```
-2. Install dependencies with uv:
-   ```bash
-   uv sync
-   ```
-3. Run the program:
-   ```bash
-   uv run python main.py
-   ```
-4. Ensure Arial font is installed on your Linux system. If it's not installed, you can install it using:
-   ```bash
-   sudo apt-get install ttf-mscorefonts-installer
-   ```
+3. **Run the System**:  
+   ```sh  
+   python awos.py  
+   ```  
 
-## ⚡️ Key Innovations
+---
 
-- Offline sun data for consistent performance
-- Color-coded status indicators for quick status assessment
-- Thread-safe data handling for reliability
-- Automated error recovery and logging
+## Configuration  
+Edit `weather_station.ini` to customize:  
+- **Modbus**: Port, baud rate, sensor addresses.  
+- **GUI**: Toggle interval, fonts, background images.  
+- **Logging**: File paths, rotation policies.  
 
-## 🛠️ Contributing
+Example:  
+```ini  
+[modbus]  
+port = /dev/ttyUSB0  
+baudrate = 9600  
 
-Contributions are welcome! Feel free to open issues or pull requests for improvements.
+[gui]  
+toggle_interval = 10000  # GUI switch delay (ms)  
+```  
 
-## 📄 License
+---
 
-MIT License. See `LICENSE` for details.
+## Usage  
+| Action                | Key Binding       |  
+|-----------------------|-------------------|  
+| Switch GUIs           | `<Tab>`           |  
+| Pause GUI Toggle      | `<Space>`         |  
+| Force Refresh         | `<F5>`            |  
+| Debug Mapping Mode    | `<F12>`           |  
+| Shutdown              | `<Escape>`        |  
 
-**Developed by **[**paakwin**](https://github.com/paakwin)
+---
 
+## Function Categories  
+
+### 1. **Initialization & Setup**  
+| Function                | Description                                  |  
+|-------------------------|----------------------------------------------|  
+| `__init__`              | Initializes GUI, sensors, and logging.      |  
+| `load_config`           | Loads INI file or defaults.                 |  
+| `setup_logging`         | Configures log rotation.                    |  
+| `init_modbus`           | Sets up Modbus client.                      |  
+
+### 2. **GUI Management**  
+| Function                | Description                                  |  
+|-------------------------|----------------------------------------------|  
+| `toggle_gui`            | Switches between GUI-1/GUI-2.               |  
+| `update_gui1_widgets`   | Refreshes basic metrics (temp, wind, etc.). |  
+| `update_static_elements`| Updates date/time/sun info.                 |  
+
+### 3. **Sensor Handling**  
+| Function                | Description                                  |  
+|-------------------------|----------------------------------------------|  
+| `read_environment_sensor` | Reads temp/humidity/pressure.              |  
+| `process_rainfall`      | Tracks daily rainfall.                       |  
+| `sensor_reader_loop`    | Thread loop for sensor polling.              |  
+
+### 4. **Data Processing**  
+| Function                | Description                                  |  
+|-------------------------|----------------------------------------------|  
+| `calculate_aqi`         | Converts PM2.5 to AQI.                       |  
+| `get_uv_state`          | Returns UV risk level/color.                 |  
+| `_degrees_to_cardinal`  | Converts wind degrees to compass direction.  |  
+
+### 5. **Logging & Storage**  
+| Function                | Description                                  |  
+|-------------------------|----------------------------------------------|  
+| `csv_writer_loop`       | Saves data to CSV files.                     |  
+| `cleanup_old_logs`      | Deletes logs >7 days old.                    |  
+
+### 6. **System Control**  
+| Function                | Description                                  |  
+|-------------------------|----------------------------------------------|  
+| `shutdown`             | Stops threads and exits cleanly.             |  
+| `force_update`          | Manual refresh of all data.                  |  
+
+---
+
+## License  
+MIT License. See `LICENSE` for details.  
+
+--- 
+
+📌 **Note**: Ensure sensors are connected before launching. For troubleshooting, check `logs/weather_station_*.log`.  
+
+--- 
+
+**Author**: [aasifshahzad]  
+**Repository**: [github.com/your-repo/weather-station](https://github.com/paakwin/multi_gui_awos)

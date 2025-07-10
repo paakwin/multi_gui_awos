@@ -360,9 +360,7 @@ class WeatherStationSystem:
 
     def create_display_widgets(self) -> None:
         """Create and configure all display widgets."""
-        # Define all widget configurations in one place
         self.widget_configs = {
-            # Common widgets for both GUIs
             'common': {
                 'time': {
                     'size': 80,
@@ -380,7 +378,7 @@ class WeatherStationSystem:
                 },
                 'day': {
                     'size': 80,
-                    'color': "#F81010",
+                    'color': "#FF0000",
                     'position': (980, 80),
                     'anchor': 'center',
                     'placeholder': 'DAY'
@@ -390,35 +388,42 @@ class WeatherStationSystem:
             'gui1': {
                 'temperature': {
                     'size': 250,
-                    'color': "#F77700",
+                    'color': "#FF5E00",
                     'position': (550, 420),
                     'anchor': 'center',
                     'placeholder': '32.5'
                 },
                 'humidity': {
-                    'size': 170,
-                    'color': "#10FD08",
-                    'position': (1500, 350),
+                    'size': 180,
+                    'color': "#00FF00",
+                    'position': (1500, 355),
                     'anchor': 'center',
                     'placeholder': '100%'
                 },
+                'humidity_state_value': {
+                    'size': 70,
+                    'color': '#00FF00',
+                    'position': (1500, 520),  # Position below humidity value
+                    'anchor': 'center',
+                    'placeholder': 'NORMAL'
+                },
                 'wind_speed': {
                     'size': 180,
-                    'color': "#06C0F8",
+                    'color': "#00BFFF",
                     'position': (450, 890),
                     'anchor': 'center',
                     'placeholder': '14.5'
                 },
                 'wind_direction': {
                     'size': 100,
-                    'color': "#06C0F8",
+                    'color': "#BF00FF",
                     'position': (1690, 890),
                     'anchor': 'center',
                     'placeholder': '326°'
                 },
                 'wind_direction_cardinal': {  # Add this new widget config
                     'size': 180,
-                    'color': "#06C0F8",
+                    'color': "#BF00FF",
                     'position': (1230, 890),
                     'anchor': 'center',
                     'placeholder': 'NW'
@@ -427,43 +432,57 @@ class WeatherStationSystem:
             # GUI-2 specific widgets
             'gui2': {
                 'uv': {
-                    'size': 100,
-                    'color': '#FFFFFF',
-                    'position': (350, 890),
+                    'size': 180,
+                    'color': '#00FF00',
+                    'position': (470, 355),
                     'anchor': 'center',
-                    'placeholder': 'UV'
+                    'placeholder': '12'
+                },
+                'uv_state_value': {
+                    'size': 70,
+                    'color': '#00FF00',
+                    'position': (480, 520),  # Position below UV value
+                    'anchor': 'center',
+                    'placeholder': 'HIGH'
                 },
                 'aqi': {
-                    'size': 100,
-                    'color': '#FFFFFF',
-                    'position': (1600, 890),
+                    'size': 180,
+                    'color': "#00BFFF",
+                    'position': (1430, 355),
                     'anchor': 'center',
-                    'placeholder': 'AQI'
+                    'placeholder': '256'
+                },
+                'aqi_state_value': {
+                    'size': 70,
+                    'color': '#00BFFF',
+                    'position': (1430, 520),  # Position below AQI value
+                    'anchor': 'center',
+                    'placeholder': 'UNHEALTHY'
                 },
                 'pressure': {
-                    'size': 100,
-                    'color': '#FFFFFF',
-                    'position': (350, 595),
+                    'size': 150,
+                    'color': '#FFFF00',
+                    'position': (335, 900),
                     'anchor': 'center',
-                    'placeholder': 'PS'
+                    'placeholder': '1008.2'
                 },
                 'rain': {
-                    'size': 80,
+                    'size': 150,
                     'color': '#FFFFFF',
-                    'position': (940, 595),
+                    'position': (1570, 900),
                     'anchor': 'center',
-                    'placeholder': 'RF'
+                    'placeholder': '0.0'
                 },
                 'sunrise': {
                     'size': 110,
-                    'color': '#FFFFFF',
+                    'color': '#FFFF00',
                     'position': (1150, 780),
                     'anchor': 'ne',
                     'placeholder': 'SR'
                 },
                 'sunset': {
                     'size': 110,
-                    'color': '#FFFFFF',
+                    'color': '#FF5E00',
                     'position': (1150, 910),
                     'anchor': 'ne',
                     'placeholder': 'SS'
@@ -579,59 +598,95 @@ class WeatherStationSystem:
     def update_gui1_widgets(self) -> None:
         """Update widgets for GUI-1 (basic metrics)."""
         try:
-            for sensor_type in ['temperature', 'humidity', 'wind_speed', 'wind_direction']:
+            for sensor_type in ['temperature', 'wind_speed', 'wind_direction']:
                 config = self.sensor_configs[sensor_type]
                 value = config['parser'](self.sensor_data)
                 formatted_value = config['display_format'](value)
-                
                 self.gui1_canvas.itemconfig(
                     self.gui1_widgets[sensor_type],
                     text=formatted_value
                 )
-                
-                # Update cardinal direction if we're processing wind direction
-                if sensor_type == 'wind_direction' and value is not None:
-                    cardinal = self._degrees_to_cardinal(value)
-                    self.gui1_canvas.itemconfig(
-                        self.gui1_widgets['wind_direction_cardinal'],
-                        text=cardinal
-                    )
+
+            # Handle humidity with state color
+            humidity = self.sensor_data.get('humidity')
+            if humidity is not None:
+                state, color = self.get_humidity_state(humidity)
+                formatted_value = f"{humidity:.1f} %"
+                self.gui1_canvas.itemconfig(
+                    self.gui1_widgets['humidity'],
+                    text=formatted_value,
+                    fill=color
+                )
+                self.gui1_canvas.itemconfig(
+                    self.gui1_widgets['humidity_state_value'],
+                    text=state,
+                    fill=color
+                )
+
+            # Update cardinal direction
+            wind_dir = self.sensor_data.get('wind_dir_degrees')
+            if wind_dir is not None:
+                cardinal = self._degrees_to_cardinal(wind_dir)
+                self.gui1_canvas.itemconfig(
+                    self.gui1_widgets['wind_direction_cardinal'],
+                    text=cardinal
+                )
         except Exception as e:
             self.log(f"Error updating GUI-1 widgets: {e}", level=logging.ERROR)
-
-    # 8-point compass divisions (each covers 45 degrees):
-        # N    : 337.5° - 22.5°   (or 337.5° - 360° and 0° - 22.5°)
-        # NE   : 22.5°  - 67.5°
-        # E    : 67.5°  - 112.5°
-        # SE   : 112.5° - 157.5°
-        # S    : 157.5° - 202.5°
-        # SW   : 202.5° - 247.5°
-        # W    : 247.5° - 292.5°
-        # NW   : 292.5° - 337.5°
 
     def update_gui2_widgets(self) -> None:
         """Update widgets for GUI-2 (advanced metrics)."""
         try:
-            # Update regular sensors
-            for sensor_type in ['uv', 'aqi', 'pressure', 'rain']:
+            # Update UV with state color
+            uv = self.sensor_data.get('uv_index')
+            if uv is not None:
+                uv_state, uv_color = self.get_uv_state(uv)
+                self.gui2_canvas.itemconfig(
+                    self.gui2_widgets['uv'],
+                    text=f"{uv:.2f}",
+                    fill=uv_color
+                )
+                self.gui2_canvas.itemconfig(
+                    self.gui2_widgets['uv_state_value'],
+                    text=uv_state,
+                    fill=uv_color
+                )
+
+            # Update AQI with state color
+            pm2_5 = self.sensor_data.get('pm2_5')
+            if pm2_5 is not None:
+                aqi = self.calculate_aqi(pm2_5)
+                aqi_state, aqi_color = self.get_aqi_state(aqi)
+                self.gui2_canvas.itemconfig(
+                    self.gui2_widgets['aqi'],
+                    text=f"{aqi:.0f}",
+                    fill=aqi_color
+                )
+                self.gui2_canvas.itemconfig(
+                    self.gui2_widgets['aqi_state_value'],
+                    text=aqi_state,
+                    fill=aqi_color
+                )
+
+            # Update other sensors
+            for sensor_type in ['pressure', 'rain']:
                 config = self.sensor_configs[sensor_type]
                 value = config['parser'](self.sensor_data)
                 formatted_value = config['display_format'](value)
-                
                 self.gui2_canvas.itemconfig(
                     self.gui2_widgets[sensor_type],
                     text=formatted_value
                 )
-            
-            # Update sun info separately since it's not sensor data
+
+            # Update sun info
             sun_info = self.get_sun_info()
             self.gui2_canvas.itemconfig(
                 self.gui2_widgets['sunrise'],
-                text=f"↑{sun_info['sunrise']}"
+                text=sun_info['sunrise']
             )
             self.gui2_canvas.itemconfig(
                 self.gui2_widgets['sunset'],
-                text=f"↓{sun_info['sunset']}"
+                text=sun_info['sunset']
             )
         except Exception as e:
             self.log(f"Error updating GUI-2 widgets: {e}", level=logging.ERROR)
@@ -1067,6 +1122,55 @@ class WeatherStationSystem:
                 self._toggle_timer = self.root.after(self.toggle_interval, self.toggle_gui)
                 self.log(f"Display toggling resumed from GUI-{self.current_gui}")
 
+    def get_aqi_state(self, aqi: float | None) -> tuple[str, str]:
+        """Determine AQI state and color based on AQI value."""
+        if aqi is None:
+            return "N/A", "#FFFFFF"
+        aqi_float = float(aqi)
+        if 0 <= aqi_float <= 50:
+            return "GOOD", "#39FF14"
+        elif 50 < aqi_float <= 100:
+            return "MODERATE", "#FFFF00"
+        elif 100 < aqi_float <= 150:
+            return "UNHEALTHY", "#FF7E00"
+        elif 150 < aqi_float <= 200:
+            return "UNHEALTHY", "#FF0000"
+        elif 200 < aqi_float <= 300:
+            return "VERY UNHEALTHY", "#8F3F97"
+        else:
+            return "HAZARDOUS", "#7E0023"
+
+    def get_uv_state(self, uv: float | None) -> tuple[str, str]:
+        """Determine UV state and color based on UV index value."""
+        if uv is None:
+            return "N/A", "#FFFFFF"
+        uv_float = float(uv)
+        if 0 <= uv_float <= 2:
+            return "LOW", "#39FF14"
+        elif 2 < uv_float <= 5:
+            return "MODERATE", "#FFFF00"
+        elif 5 < uv_float <= 7:
+            return "HIGH", "#FF7E00"
+        elif 7 < uv_float <= 10:
+            return "VERY HIGH", "#FF0000"
+        else:
+            return "EXTREME", "#8F3F97"
+
+    def get_humidity_state(self, humidity: float | None) -> tuple[str, str]:
+        """Determine humidity state and color based on humidity value."""
+        if humidity is None:
+            return "N/A", "#FFFFFF"
+        humidity_float = float(humidity)
+        if 0 <= humidity_float <= 30:
+            return "LOW", "#3EC1EC"
+        elif 30 < humidity_float <= 50:
+            return "NORMAL", "#39FF14"
+        elif 50 < humidity_float <= 60:
+            return "SLIGHTLY HIGH", "#FFFF00"
+        elif 60 < humidity_float <= 70:
+            return "HIGH", "#FF7E00"
+        else:
+            return "VERY HIGH", "#FF0000"
         
 if __name__ == "__main__":
     try:
