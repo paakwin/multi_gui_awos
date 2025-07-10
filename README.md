@@ -58,7 +58,7 @@ graph LR
 
 2. **Clone the Repository**:  
    ```sh  
-   git clone https://github.com/your-repo/weather-station.git  
+   git clone https://github.com/paakwin/multi_gui_awos  
    cd weather-station  
    ```  
 
