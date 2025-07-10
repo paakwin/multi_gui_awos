@@ -53,7 +53,7 @@ graph LR
    - Python 3.8+  
    - Libraries: `pymodbus`, `Pillow`, `pandas`, `tkinter`  
    ```sh  
-   pip install pymodbus pillow pandas  
+   pip install pymodbus pillow pandas   
    ```  
 
 2. **Clone the Repository**:  
