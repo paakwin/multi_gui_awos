@@ -1,0 +1,26 @@
+2025-07-10 09:13:11,413 - INFO - Weather Station System Initialized
+2025-07-10 09:13:19,298 - ERROR - Modbus connection failed
+2025-07-10 09:13:29,302 - INFO - Switched to GUI-2
+2025-07-10 09:13:39,302 - INFO - Switched to GUI-1
+2025-07-10 09:13:49,303 - INFO - Switched to GUI-2
+2025-07-10 09:13:59,303 - INFO - Switched to GUI-1
+2025-07-10 09:14:09,304 - INFO - Switched to GUI-2
+2025-07-10 09:14:19,304 - INFO - Switched to GUI-1
+2025-07-10 09:14:29,304 - INFO - Switched to GUI-2
+2025-07-10 09:21:28,769 - INFO - Weather Station System Initialized
+2025-07-10 09:21:36,595 - ERROR - Modbus connection failed
+2025-07-10 09:21:46,597 - INFO - Switched to GUI-2
+2025-07-10 09:22:06,214 - INFO - Weather Station System Initialized
+2025-07-10 09:22:14,400 - ERROR - Modbus connection failed
+2025-07-10 09:22:14,402 - ERROR - Error updating display: 'day'
+2025-07-10 09:22:24,404 - INFO - Switched to GUI-2
+2025-07-10 09:22:34,404 - INFO - Switched to GUI-1
+2025-07-10 09:22:44,405 - INFO - Switched to GUI-2
+2025-07-10 09:22:54,405 - INFO - Switched to GUI-1
+2025-07-10 09:23:04,406 - INFO - Switched to GUI-2
+2025-07-10 09:23:14,413 - INFO - Switched to GUI-1
+2025-07-10 09:23:24,415 - INFO - Switched to GUI-2
+2025-07-10 09:23:34,415 - INFO - Switched to GUI-1
+2025-07-10 09:23:44,416 - INFO - Switched to GUI-2
+2025-07-10 09:23:54,416 - INFO - Switched to GUI-1
+2025-07-10 09:24:04,417 - INFO - Switched to GUI-2
