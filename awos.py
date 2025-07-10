@@ -33,6 +33,9 @@ class WeatherStationSystem:
         self.root = root
         self.root.title("Weather Station Dashboard")
         
+        # Add mapping mode initialization
+        self.mapping_mode = False  # Add this line
+        
         # Initialize logger first
         self.logger = logging.getLogger('WeatherStation')
         self.logger.setLevel(logging.INFO)
@@ -323,7 +326,7 @@ class WeatherStationSystem:
                 },
                 'day': {
                     'size': 80,
-                    'color': '#FFFFFF',
+                    'color': "#F81010",
                     'position': (980, 80),
                     'anchor': 'center',
                     'placeholder': 'DAY'
@@ -332,11 +335,11 @@ class WeatherStationSystem:
             # GUI-1 specific widgets
             'gui1': {
                 'temperature': {
-                    'size': 100,
-                    'color': '#FFFFFF',
-                    'position': (350, 250),
+                    'size': 250,
+                    'color': "#F77700",
+                    'position': (550, 420),
                     'anchor': 'center',
-                    'placeholder': 'TM'
+                    'placeholder': '32.5'
                 },
                 'humidity': {
                     'size': 100,
@@ -481,7 +484,7 @@ class WeatherStationSystem:
     
     def create_widget(self, canvas: tk.Canvas, pos: Tuple[int, int], 
                  size: int, anchor: str = 'center',
-                 color: str = '#FFFFFF', placeholder: str = '--') -> int:
+                 color: str = '#FFFFFF', placeholder: str = '--' ) -> int:
         """Create a widget with specified configuration."""
         return canvas.create_text(
             pos[0], pos[1],
@@ -948,24 +951,49 @@ class WeatherStationSystem:
 
     def toggle_mapping_mode(self, event=None) -> None:
         """Toggle coordinate mapping debug mode."""
-        self.mapping_mode = not self.mapping_mode
+        self.mapping_mode = not getattr(self, 'mapping_mode', False)
+        
         if self.mapping_mode:
+            self.log("Mapping mode enabled")
             self.gui1_canvas.bind('<Button-1>', self.show_coordinates)
             self.gui2_canvas.bind('<Button-1>', self.show_coordinates)
-            self.coordinate_text = self.gui1_canvas.create_text(
-                10, 10, text="Mapping Mode ON", fill='red', anchor='nw')
+            # Create indicator text on both canvases
+            self.coordinate_text_gui1 = self.gui1_canvas.create_text(
+                100, 50, text="Mapping Mode ON", fill='red', anchor='nw', font=('Arial', 24, 'bold')
+            )
+            self.coordinate_text_gui2 = self.gui2_canvas.create_text(
+                100, 50, text="Mapping Mode ON", fill='red', anchor='nw', font=('Arial', 24, 'bold')
+            )
         else:
+            self.log("Mapping mode disabled")
             self.gui1_canvas.unbind('<Button-1>')
             self.gui2_canvas.unbind('<Button-1>')
-            if hasattr(self, 'coordinate_text'):
-                self.gui1_canvas.delete(self.coordinate_text)
+            # Remove indicator text from both canvases
+            if hasattr(self, 'coordinate_text_gui1'):
+                self.gui1_canvas.delete(self.coordinate_text_gui1)
+            if hasattr(self, 'coordinate_text_gui2'):
+                self.gui2_canvas.delete(self.coordinate_text_gui2)
 
     def show_coordinates(self, event) -> None:
         """Display click coordinates in mapping mode."""
         x, y = event.x, event.y
-        marker = event.widget.create_oval(x-2, y-2, x+2, y+2, fill='red')
-        text = event.widget.create_text(x+10, y-10, text=f"({x}, {y})", fill='red', anchor='w')
-        self.root.after(2000, lambda: [event.widget.delete(marker), event.widget.delete(text)])
+        canvas = event.widget
+        
+        # Create marker and coordinates text
+        marker = canvas.create_oval(x-5, y-5, x+5, y+5, fill='red', outline='white', width=2)
+        text = canvas.create_text(
+            x+15, y, 
+            text=f"({x}, {y})", 
+            fill='red', 
+            anchor='w',
+            font=('Arial', 16, 'bold')
+        )
+        
+        # Log the coordinates
+        self.log(f"Mapped coordinates: ({x}, {y})")
+        
+        # Remove after 3 seconds
+        self.root.after(3000, lambda: [canvas.delete(marker), canvas.delete(text)])
 
     def force_update(self) -> None:
         """Force immediate display update."""
@@ -978,22 +1006,25 @@ class WeatherStationSystem:
         self.check_and_rotate_logs()
         self.root.after(3600000, self.check_log_rotation)
 
-    def shutdown(self) -> None:
-        """Clean shutdown with proper cleanup."""
-        if hasattr(self, '_toggle_timer'):
-            self.root.after_cancel(self._toggle_timer)
-        
+    def shutdown(self, event=None) -> None:
+        """Perform a clean shutdown of the system, stopping threads and closing Modbus."""
+        self.log("Shutting down weather station system")
         self.running = False
         
-        if hasattr(self, 'sensor_thread'):
-            self.sensor_thread.join(timeout=2)
-        if hasattr(self, 'csv_thread'):
-            self.csv_thread.join(timeout=2)
-        
-        if hasattr(self, 'modbus_client') and self.modbus_client.connected:
-            self.modbus_client.close()
-        
-        self.root.quit()
+        try:
+            if hasattr(self, 'sensor_thread'):
+                self.sensor_thread.join(timeout=2)
+            if hasattr(self, 'csv_thread'):
+                self.csv_thread.join(timeout=2)
+            
+            if hasattr(self, 'modbus_client') and self.modbus_client.connected:
+                self.modbus_client.close()
+                
+            self.log("Cleanup completed, exiting application")
+        except Exception as e:
+            self.log(f"Error during shutdown: {e}", level=logging.ERROR)
+        finally:
+            self.root.quit()
 
     def _keep_focus(self) -> None:
         """Maintain window focus."""

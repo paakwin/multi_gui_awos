@@ -29,7 +29,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'awos_assit_code'))
 class WeatherStationSystem:
     # --- Initialization and Configuration ---
     def __init__(self, root: tk.Tk) -> None:
-        """Initialize the WeatherStationSystem, set up GUI, logging, config, sensors, and start threads."""
+        """Initialize the WeatherStationSystem with dual GUI support."""
         self.root = root
         self.root.title("Weather Station Dashboard")
         self.root.after(1000, self._keep_focus)  # Add periodic focus check
@@ -49,11 +49,16 @@ class WeatherStationSystem:
         self.update_display()
         self.update_static_elements()
         
-        # Bind keys
-        self.root.bind('<Escape>', lambda e: self.shutdown())
+        # Bind keys - Fix ESC key binding
+        self.root.bind('<Escape>', self.shutdown)  # Changed from 'ESC' to 'Escape'
         self.root.bind('<F12>', self.toggle_mapping_mode)
-        self.root.bind('<F5>', lambda e: self.force_update())  # Add F5 refresh
-        
+        self.root.bind('<F5>', lambda e: self.force_update())
+        self.root.bind('<Tab>', lambda e: self.force_gui_switch())
+        self.root.bind('<space>', self.toggle_pause_on_current_gui)
+
+        # Also bind to protocol for window close button
+        self.root.protocol("WM_DELETE_WINDOW", self.shutdown)
+
         # Schedule periodic log rotation check
         self.root.after(3600000, self.check_log_rotation)  # Check every hour
 
