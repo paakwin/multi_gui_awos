@@ -58,6 +58,7 @@ class WeatherStationSystem:
             self.root.bind('<F12>', self.toggle_mapping_mode)
             self.root.bind('<F5>', lambda e: self.force_update())
             self.root.bind('<Tab>', lambda e: self.force_gui_switch())
+            self.root.bind('<space>', self.toggle_pause_on_current_gui)  # Add this line
             
             # Schedule periodic tasks
             self.root.after(1000, self._keep_focus)
@@ -99,8 +100,8 @@ class WeatherStationSystem:
             },
             'gui': {
                 'update_interval': 1000,
-                'gui1_image': 'gui1_image.JPG',
-                'gui2_image': 'gui2_image.jpg',
+                'gui1_image': 'gui1_image.jpg',
+                'gui2_image': 'gui2_image.JPG',
                 'font': 'Digital-7',
                 'rain_reset_threshold': 0.1,
                 'rain_reset_time': 12,
@@ -306,13 +307,13 @@ class WeatherStationSystem:
         
         # Common widgets (date/time) - create for both GUIs with same coordinates
         self.common_widgets = {
-            'time_gui1': self.create_widget(self.gui1_canvas, (1550, 55), 55),
-            'date_gui1': self.create_widget(self.gui1_canvas, (330, 55), 55),
-            'day_gui1': self.create_widget(self.gui1_canvas, (950, 55), 55),
+            'time_gui1': self.create_widget(self.gui1_canvas, (1530, 80), 70),
+            'date_gui1': self.create_widget(self.gui1_canvas, (330, 80), 70),
+            'day_gui1': self.create_widget(self.gui1_canvas, (980, 80), 70),
             # Create identical widgets for GUI 2 with same coordinates
-            'time_gui2': self.create_widget(self.gui2_canvas, (1550, 55), 55),
-            'date_gui2': self.create_widget(self.gui2_canvas, (330, 55), 55),
-            'day_gui2': self.create_widget(self.gui2_canvas, (950, 55), 55)
+            'time_gui2': self.create_widget(self.gui2_canvas, (1530, 80), 70),
+            'date_gui2': self.create_widget(self.gui2_canvas, (330, 80), 70),
+            'day_gui2': self.create_widget(self.gui2_canvas, (980, 80), 70)
         }
         
         # GUI-1 Widgets (Basic metrics)
@@ -333,22 +334,7 @@ class WeatherStationSystem:
             'sunset': self.create_widget(self.gui2_canvas, (1145, 935), 80, anchor='ne')
         }
         
-        # Add common widgets to GUI-2
-        self.gui2_canvas.create_text(
-            1550, 55, text="--", 
-            font=(font_name, 55, 'bold'), 
-            fill="#FFFFFF", anchor='center'
-        )
-        self.gui2_canvas.create_text(
-            330, 55, text="--", 
-            font=(font_name, 55, 'bold'), 
-            fill="#FFFFFF", anchor='center'
-        )
-        self.gui2_canvas.create_text(
-            950, 55, text="--", 
-            font=(font_name, 55, 'bold'), 
-            fill="#FFFFFF", anchor='center'
-        )
+  
 
     def create_widget(self, canvas: tk.Canvas, pos: Tuple[int, int], 
                      size: int, anchor: str = 'center') -> int:
@@ -356,7 +342,8 @@ class WeatherStationSystem:
         return canvas.create_text(
             pos[0], pos[1],
             text="--",
-            font=(self.config['gui'].get('font', 'Digital-7'), size, 'bold'),
+            font=('Arial', size, 'bold'),  # Changed to Arial font
+            # font=(self.config['gui'].get('font', 'Digital-7'), size, 'bold'),
             fill="#FFFFFF",
             anchor=anchor
         )
@@ -445,8 +432,26 @@ class WeatherStationSystem:
             self.log(f"Error updating GUI-2 widgets: {e}", level=logging.ERROR)
 
     def force_gui_switch(self, event=None) -> None:
-        """Manually trigger GUI switch."""
-        self.toggle_gui(immediate=True)
+        """Manually trigger GUI switch on Tab press."""
+        # Cancel existing timer to prevent conflicts
+        if self._toggle_timer:
+            self.root.after_cancel(self._toggle_timer)
+            self._toggle_timer = None
+
+        # Switch to opposite GUI
+        if self.current_gui == 1:
+            self.gui1_canvas.pack_forget()
+            self.gui2_canvas.pack(fill='both', expand=True)
+            self.current_gui = 2
+        else:
+            self.gui2_canvas.pack_forget()
+            self.gui1_canvas.pack(fill='both', expand=True)
+            self.current_gui = 1
+
+        self.log(f"Manually switched to GUI-{self.current_gui}")
+        
+        # Restart the toggle timer
+        self._toggle_timer = self.root.after(self.toggle_interval, self.toggle_gui)
 
     def pause_gui_toggle(self) -> None:
         """Temporarily pause GUI toggling."""
@@ -863,6 +868,17 @@ class WeatherStationSystem:
         self.root.lift()
         self.root.after(1000, self._keep_focus)
         
+    def toggle_pause_on_current_gui(self, event=None) -> None:
+        """Toggle pause/resume on current GUI display."""
+        if hasattr(self, '_toggle_timer'):
+            if self._toggle_timer:  # If timer exists, we're currently toggling
+                self.root.after_cancel(self._toggle_timer)
+                self._toggle_timer = None
+                self.log(f"Display paused on GUI-{self.current_gui}")
+            else:  # If timer is None, we're currently paused
+                self._toggle_timer = self.root.after(self.toggle_interval, self.toggle_gui)
+                self.log(f"Display toggling resumed from GUI-{self.current_gui}")
+
         
 if __name__ == "__main__":
     try:

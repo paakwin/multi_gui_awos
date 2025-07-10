@@ -50,6 +50,10 @@ A comprehensive weather station and dashboard system implemented in Python using
    ```bash
    uv run python main.py
    ```
+4. Ensure Arial font is installed on your Linux system. If it's not installed, you can install it using:
+   ```bash
+   sudo apt-get install ttf-mscorefonts-installer
+   ```
 
 ## ⚡️ Key Innovations
 
