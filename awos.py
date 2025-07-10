@@ -302,51 +302,160 @@ class WeatherStationSystem:
         self.create_display_widgets()
 
     def create_display_widgets(self) -> None:
-        """Create widgets for both GUI layouts."""
-        font_name = self.config['gui'].get('font', 'Digital-7')
-        
-        # Common widgets (date/time) - create for both GUIs with same coordinates
-        self.common_widgets = {
-            'time_gui1': self.create_widget(self.gui1_canvas, (1530, 80), 70),
-            'date_gui1': self.create_widget(self.gui1_canvas, (330, 80), 70),
-            'day_gui1': self.create_widget(self.gui1_canvas, (980, 80), 70),
-            # Create identical widgets for GUI 2 with same coordinates
-            'time_gui2': self.create_widget(self.gui2_canvas, (1530, 80), 70),
-            'date_gui2': self.create_widget(self.gui2_canvas, (330, 80), 70),
-            'day_gui2': self.create_widget(self.gui2_canvas, (980, 80), 70)
+        """Create and configure all display widgets."""
+        # Define all widget configurations in one place
+        self.widget_configs = {
+            # Common widgets for both GUIs
+            'common': {
+                'time': {
+                    'size': 80,
+                    'color': '#FFFFFF',
+                    'position': (1530, 80),
+                    'anchor': 'center',
+                    'placeholder': 'TIME'
+                },
+                'date': {
+                    'size': 80,
+                    'color': '#FFFFFF',
+                    'position': (330, 80),
+                    'anchor': 'center',
+                    'placeholder': 'DATE'
+                },
+                'day': {
+                    'size': 80,
+                    'color': '#FFFFFF',
+                    'position': (980, 80),
+                    'anchor': 'center',
+                    'placeholder': 'DAY'
+                }
+            },
+            # GUI-1 specific widgets
+            'gui1': {
+                'temperature': {
+                    'size': 100,
+                    'color': '#FFFFFF',
+                    'position': (350, 250),
+                    'anchor': 'center',
+                    'placeholder': 'TM'
+                },
+                'humidity': {
+                    'size': 100,
+                    'color': '#FFFFFF',
+                    'position': (980, 250),
+                    'anchor': 'center',
+                    'placeholder': 'HM'
+                },
+                'wind_speed': {
+                    'size': 100,
+                    'color': '#FFFFFF',
+                    'position': (1600, 250),
+                    'anchor': 'center',
+                    'placeholder': 'WS'
+                },
+                'wind_direction': {
+                    'size': 60,
+                    'color': '#FFFFFF',
+                    'position': (1600, 595),
+                    'anchor': 'center',
+                    'placeholder': 'WD'
+                }
+            },
+            # GUI-2 specific widgets
+            'gui2': {
+                'uv': {
+                    'size': 100,
+                    'color': '#FFFFFF',
+                    'position': (350, 890),
+                    'anchor': 'center',
+                    'placeholder': 'UV'
+                },
+                'aqi': {
+                    'size': 100,
+                    'color': '#FFFFFF',
+                    'position': (1600, 890),
+                    'anchor': 'center',
+                    'placeholder': 'AQI'
+                },
+                'pressure': {
+                    'size': 100,
+                    'color': '#FFFFFF',
+                    'position': (350, 595),
+                    'anchor': 'center',
+                    'placeholder': 'PS'
+                },
+                'rain': {
+                    'size': 80,
+                    'color': '#FFFFFF',
+                    'position': (940, 595),
+                    'anchor': 'center',
+                    'placeholder': 'RF'
+                },
+                'sunrise': {
+                    'size': 110,
+                    'color': '#FFFFFF',
+                    'position': (1150, 780),
+                    'anchor': 'ne',
+                    'placeholder': 'SR'
+                },
+                'sunset': {
+                    'size': 110,
+                    'color': '#FFFFFF',
+                    'position': (1150, 910),
+                    'anchor': 'ne',
+                    'placeholder': 'SS'
+                }
+            }
         }
-        
-        # GUI-1 Widgets (Basic metrics)
-        self.gui1_widgets = {
-            'temperature': self.create_widget(self.gui1_canvas, (350, 250), 100),
-            'humidity': self.create_widget(self.gui1_canvas, (980, 250), 100),
-            'wind_speed': self.create_widget(self.gui1_canvas, (1600, 250), 100),
-            'wind_direction': self.create_widget(self.gui1_canvas, (1600, 595), 60)
-        }
-        
-        # GUI-2 Widgets (Advanced metrics)
-        self.gui2_widgets = {
-            'uv': self.create_widget(self.gui2_canvas, (350, 890), 100),
-            'aqi': self.create_widget(self.gui2_canvas, (1600, 890), 100),
-            'pressure': self.create_widget(self.gui2_canvas, (350, 595), 100),
-            'rain': self.create_widget(self.gui2_canvas, (940, 595), 80),
-            'sunrise': self.create_widget(self.gui2_canvas, (1145, 822), 80, anchor='ne'),
-            'sunset': self.create_widget(self.gui2_canvas, (1145, 935), 80, anchor='ne')
-        }
-        
-  
 
-    def create_widget(self, canvas: tk.Canvas, pos: Tuple[int, int], 
-                     size: int, anchor: str = 'center') -> int:
-        """Helper to create consistent widgets."""
-        return canvas.create_text(
-            pos[0], pos[1],
-            text="--",
-            font=('Arial', size, 'bold'),  # Changed to Arial font
-            # font=(self.config['gui'].get('font', 'Digital-7'), size, 'bold'),
-            fill="#FFFFFF",
-            anchor=anchor
-        )
+        # Create widgets based on configurations
+        font_name = self.config['gui'].get('font', 'Arial')
+        
+        # Create common widgets for both GUIs
+        self.common_widgets = {}
+        for name, config in self.widget_configs['common'].items():
+            # Create for GUI 1
+            self.common_widgets[f"{name}_gui1"] = self.create_widget(
+                self.gui1_canvas,
+                config['position'],
+                config['size'],
+                config['anchor'],
+                config['color'],
+                config['placeholder']
+            )
+            # Create for GUI 2
+            self.common_widgets[f"{name}_gui2"] = self.create_widget(
+                self.gui2_canvas,
+                config['position'],
+                config['size'],
+                config['anchor'],
+                config['color'],
+                config['placeholder']
+            )
+
+        # Create GUI-1 specific widgets
+        self.gui1_widgets = {}
+        for name, config in self.widget_configs['gui1'].items():
+            self.gui1_widgets[name] = self.create_widget(
+                self.gui1_canvas,
+                config['position'],
+                config['size'],
+                config['anchor'],
+                config['color'],
+                config['placeholder']
+            )
+
+        # Create GUI-2 specific widgets
+        self.gui2_widgets = {}
+        for name, config in self.widget_configs['gui2'].items():
+            self.gui2_widgets[name] = self.create_widget(
+                self.gui2_canvas,
+                config['position'],
+                config['size'],
+                config['anchor'],
+                config['color'],
+                config['placeholder']
+            )
+        
 
     def start_gui_toggle(self) -> None:
         """Start the automatic GUI toggle timer."""
@@ -368,6 +477,20 @@ class WeatherStationSystem:
         
         self.log(f"Switched to GUI-{self.current_gui}")
         self._toggle_timer = self.root.after(self.toggle_interval, self.toggle_gui)
+        
+    
+    def create_widget(self, canvas: tk.Canvas, pos: Tuple[int, int], 
+                 size: int, anchor: str = 'center',
+                 color: str = '#FFFFFF', placeholder: str = '--') -> int:
+        """Create a widget with specified configuration."""
+        return canvas.create_text(
+            pos[0], pos[1],
+            text=placeholder,
+            font=('Arial', size, 'bold'),  # Changed to Arial font
+            # font=(self.config['gui'].get('font', 'Digital-7'), size, 'bold'),
+            fill=color,
+            anchor=anchor
+        )
 
     def update_display(self) -> None:
         """Update widgets based on current active GUI."""
@@ -476,48 +599,57 @@ class WeatherStationSystem:
         if not self.modbus_client.connect():
             self.log("Modbus connection failed", logging.ERROR)
 
+
     def init_sensor_config(self) -> None:
         """Set up sensor parsing configurations."""
         self.sensor_configs = {
             'temperature': {
                 'parser': lambda data: data.get('temperature'),
-                'display_format': lambda v: f"{v:.1f}" if v is not None else "tm",
-                'widget': 'temperature_value'
+                'display_format': lambda v: f"{v:.1f}" if v is not None else "37.5",
+                'widget': 'temperature_value',
+                'size': 100
             },
             'humidity': {
                 'parser': lambda data: data.get('humidity'),
-                'display_format': lambda v: f"{v:.1f}%" if v is not None else "hm",
-                'widget': 'humidity_value'
-            },
-            'pressure': {
-                'parser': lambda data: data.get('pressure'),
-                'display_format': lambda v: f"{v:.1f}" if v is not None else "ps",
-                'widget': 'pressure_value'
+                'display_format': lambda v: f"{v:.1f}%" if v is not None else "100",
+                'widget': 'humidity_value',
+                'size': 100
             },
             'wind_speed': {
                 'parser': lambda data: data.get('wind_speed', 0.0) * 3.6 if data.get('wind_speed') is not None else None,
-                'display_format': lambda v: f"{v:.1f}" if v is not None else "ws",
-                'widget': 'wind_speed_value'
+                'display_format': lambda v: f"{v:.1f}" if v is not None else "25.0",
+                'widget': 'wind_speed_value',
+                'size': 80
             },
             'wind_direction': {
                 'parser': lambda data: data.get('wind_dir_degrees'),
-                'display_format': lambda v: f"{v}°" if v is not None else "wd",
-                'widget': 'wind_direction_value'
+                'display_format': lambda v: f"{v}°" if v is not None else "360",
+                'widget': 'wind_direction_value',
+                'size': 80
+            },
+            'pressure': {
+                'parser': lambda data: data.get('pressure'),
+                'display_format': lambda v: f"{v:.1f}" if v is not None else "PS",
+                'widget': 'pressure_value',
+                'size': 100
             },
             'rain': {
                 'parser': lambda data: self.process_rainfall(data.get('rainfall')),
-                'display_format': lambda v: f"{v:.1f}" if v is not None else "rf",
-                'widget': 'rain_value'
+                'display_format': lambda v: f"{v:.1f}" if v is not None else "RF",
+                'widget': 'rain_value',
+                'size': 80
             },
             'uv': {
                 'parser': lambda data: data.get('uv_index'),
-                'display_format': lambda v: f"{v:.2f}" if v is not None else "uv",
-                'widget': 'uv_value'
+                'display_format': lambda v: f"{v:.2f}" if v is not None else "UV",
+                'widget': 'uv_value',
+                'size': 100
             },
             'aqi': {
                 'parser': lambda data: self.calculate_aqi(data.get('pm2_5')),
-                'display_format': lambda v: f"{v:.0f}" if v is not None else "aqi",
-                'widget': 'aqi_value'
+                'display_format': lambda v: f"{v:.0f}" if v is not None else "AQI",
+                'widget': 'aqi_value',
+                'size': 100
             }
         }
 
@@ -807,9 +939,9 @@ class WeatherStationSystem:
         self.gui2_canvas.itemconfig(self.common_widgets['date_gui2'], text=datetime_info['date'])
         self.gui2_canvas.itemconfig(self.common_widgets['time_gui2'], text=datetime_info['time'])
 
-        # Update sun info on GUI 2
-        self.gui2_canvas.itemconfig(self.gui2_widgets['sunrise'], text=f"↑{sun_info['sunrise']}")
-        self.gui2_canvas.itemconfig(self.gui2_widgets['sunset'], text=f"↓{sun_info['sunset']}")
+        # Update sun info on GUI 2 without arrows
+        self.gui2_canvas.itemconfig(self.gui2_widgets['sunrise'], text=sun_info['sunrise'])
+        self.gui2_canvas.itemconfig(self.gui2_widgets['sunset'], text=sun_info['sunset'])
 
         # Schedule next update in 60 seconds
         self.root.after(60000, self.update_static_elements)
