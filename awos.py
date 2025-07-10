@@ -323,7 +323,7 @@ class WeatherStationSystem:
                 'parser': lambda data: data.get('wind_speed', 0.0) * 3.6 if data.get('wind_speed') is not None else None,
                 'display_format': lambda v: f"{v:.1f}" if v is not None else "25.0",
                 'widget': 'wind_speed_value',
-                'size': 80
+                'size': 100
             },
             'wind_direction': {
                 'parser': lambda data: data.get('wind_dir_degrees'),
@@ -403,18 +403,25 @@ class WeatherStationSystem:
                     'placeholder': '100%'
                 },
                 'wind_speed': {
-                    'size': 100,
-                    'color': '#FFFFFF',
-                    'position': (1600, 250),
+                    'size': 180,
+                    'color': "#06C0F8",
+                    'position': (450, 890),
                     'anchor': 'center',
-                    'placeholder': 'WS'
+                    'placeholder': '14.5'
                 },
                 'wind_direction': {
-                    'size': 60,
-                    'color': '#FFFFFF',
-                    'position': (1600, 595),
+                    'size': 100,
+                    'color': "#06C0F8",
+                    'position': (1690, 890),
                     'anchor': 'center',
-                    'placeholder': 'WD'
+                    'placeholder': '326°'
+                },
+                'wind_direction_cardinal': {  # Add this new widget config
+                    'size': 180,
+                    'color': "#06C0F8",
+                    'position': (1230, 890),
+                    'anchor': 'center',
+                    'placeholder': 'NW'
                 }
             },
             # GUI-2 specific widgets
@@ -581,8 +588,26 @@ class WeatherStationSystem:
                     self.gui1_widgets[sensor_type],
                     text=formatted_value
                 )
+                
+                # Update cardinal direction if we're processing wind direction
+                if sensor_type == 'wind_direction' and value is not None:
+                    cardinal = self._degrees_to_cardinal(value)
+                    self.gui1_canvas.itemconfig(
+                        self.gui1_widgets['wind_direction_cardinal'],
+                        text=cardinal
+                    )
         except Exception as e:
             self.log(f"Error updating GUI-1 widgets: {e}", level=logging.ERROR)
+
+    # 8-point compass divisions (each covers 45 degrees):
+        # N    : 337.5° - 22.5°   (or 337.5° - 360° and 0° - 22.5°)
+        # NE   : 22.5°  - 67.5°
+        # E    : 67.5°  - 112.5°
+        # SE   : 112.5° - 157.5°
+        # S    : 157.5° - 202.5°
+        # SW   : 202.5° - 247.5°
+        # W    : 247.5° - 292.5°
+        # NW   : 292.5° - 337.5°
 
     def update_gui2_widgets(self) -> None:
         """Update widgets for GUI-2 (advanced metrics)."""
@@ -742,12 +767,10 @@ class WeatherStationSystem:
             return None
 
     def _degrees_to_cardinal(self, degrees: float) -> str:
-        """Convert degrees to cardinal direction."""
-        directions = [
-            "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
-            "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"
-        ]
-        return directions[round(degrees / (360. / len(directions))) % len(directions)]
+        """Convert degrees to cardinal direction (8-point compass)."""
+        directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
+        # Each direction covers 45 degrees (360/8)
+        return directions[round(degrees / 45.0) % 8]
 
     def read_rainfall(self) -> dict:
         """Read rainfall from sensor."""
