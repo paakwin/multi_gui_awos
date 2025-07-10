@@ -39,6 +39,8 @@ class WeatherStationSystem:
         # Initialize logger first
         self.logger = logging.getLogger('WeatherStation')
         self.logger.setLevel(logging.INFO)
+        self.csv_dir = os.path.join(os.path.dirname(__file__), "csv_data")  # Add this line
+        os.makedirs(self.csv_dir, exist_ok=True)  # Ensure directory exists
         
         try:
             # Initialize system in proper order
@@ -64,11 +66,16 @@ class WeatherStationSystem:
             self.root.bind('<space>', self.toggle_pause_on_current_gui)  # Add this line
             
             # Schedule periodic tasks
-            self.root.after(1000, self._keep_focus)
-            self.root.after(3600000, self.check_log_rotation)
-            self.toggle_interval = self.config['gui'].get('toggle_interval', 10000)
+            self.root.after(1000, self._keep_focus)  # Keep window focused every 1s
+            self.root.after(3600000, self.check_log_rotation)  # Check logs hourly
+
+            # Set GUI toggle intervals
+            self.gui1_toggle_interval = 10000  # 10 seconds for GUI-1
+            self.gui2_toggle_interval = 5000   # 5 seconds for GUI-2
             self._toggle_timer = None
-            self.start_gui_toggle()
+
+            # Start the GUI toggling system
+            self.toggle_gui()  # Start immediately 
             
         except Exception as e:
             print(f"Initialization error: {e}")
@@ -545,7 +552,6 @@ class WeatherStationSystem:
         self._toggle_timer = self.root.after(self.toggle_interval, self.toggle_gui)
 
     def toggle_gui(self, immediate: bool = False) -> None:
-        """Toggle between GUIs with optional immediate switch."""
         if self._toggle_timer:
             self.root.after_cancel(self._toggle_timer)
         
@@ -553,13 +559,15 @@ class WeatherStationSystem:
             self.gui1_canvas.pack_forget()
             self.gui2_canvas.pack(fill='both', expand=True)
             self.current_gui = 2
+            next_interval = self.gui2_toggle_interval  # Use GUI-2's interval
         else:
             self.gui2_canvas.pack_forget()
             self.gui1_canvas.pack(fill='both', expand=True)
             self.current_gui = 1
+            next_interval = self.gui1_toggle_interval  # Use GUI-1's interval
         
-        self.log(f"Switched to GUI-{self.current_gui}")
-        self._toggle_timer = self.root.after(self.toggle_interval, self.toggle_gui)
+        self.log(f"Switched to GUI-{self.current_gui} (Next toggle in {next_interval//1000}s")
+        self._toggle_timer = self.root.after(next_interval, self.toggle_gui)
         
     
     def create_widget(self, canvas: tk.Canvas, pos: Tuple[int, int], 
@@ -693,25 +701,9 @@ class WeatherStationSystem:
 
     def force_gui_switch(self, event=None) -> None:
         """Manually trigger GUI switch on Tab press."""
-        # Cancel existing timer to prevent conflicts
         if self._toggle_timer:
             self.root.after_cancel(self._toggle_timer)
-            self._toggle_timer = None
-
-        # Switch to opposite GUI
-        if self.current_gui == 1:
-            self.gui1_canvas.pack_forget()
-            self.gui2_canvas.pack(fill='both', expand=True)
-            self.current_gui = 2
-        else:
-            self.gui2_canvas.pack_forget()
-            self.gui1_canvas.pack(fill='both', expand=True)
-            self.current_gui = 1
-
-        self.log(f"Manually switched to GUI-{self.current_gui}")
-        
-        # Restart the toggle timer
-        self._toggle_timer = self.root.after(self.toggle_interval, self.toggle_gui)
+        self.toggle_gui(immediate=True)  # Let toggle_gui handle the interval logic
 
     def pause_gui_toggle(self) -> None:
         """Temporarily pause GUI toggling."""
@@ -940,44 +932,79 @@ class WeatherStationSystem:
             except Exception as e:
                 self.log(f"Sensor read error: {e}", logging.ERROR)
                 time.sleep(1)
-
-    def csv_writer_loop(self) -> None:
-        """Write sensor data to CSV files."""
-        while self.running:
-            try:
-                data = self.data_queue.get(timeout=1)
-                current_date = datetime.now().strftime('%Y-%m-%d')
-                csv_file = os.path.join(self.csv_dir, f"weather_data_{current_date}.csv")
-                
-                if not os.path.exists(csv_file):
-                    with open(csv_file, 'w') as f:
-                        writer = csv.writer(f)
-                        writer.writerow([
-                            'timestamp', 'temperature', 'humidity', 'pressure', 
-                            'uv_index', 'co2', 'pm2_5', 'pm10', 'wind_speed', 
-                            'wind_dir_degrees', 'rainfall'
-                        ])
-                    self.cleanup_old_csv()
                     
-                with open(csv_file, 'a') as f:
+    def csv_writer_loop(self) -> None:
+        """Write sensor data to CSV file every 30 seconds, writing None when data becomes stale."""
+        self.log(f"CSV writer thread started. Output directory: {self.csv_dir}")
+        csv_file = os.path.join(self.csv_dir, "weather_data.csv")
+        
+        # Configuration
+        WRITE_INTERVAL = 30  # seconds between writes
+        DATA_TIMEOUT = 60    # seconds after which we consider data stale
+        
+        # Define the header
+        header = [
+            'timestamp', 'date', 'time', 'day',
+            'temperature', 'humidity', 'humidity_state_value',
+            'wind_speed', 'wind_direction', 'wind_direction_cardinal',
+            'uv', 'uv_state_value', 'aqi', 'aqi_state_value',
+            'pressure', 'rain'
+        ]
+        
+        # Initialize with None values and track last update times
+        last_values = {key: None for key in header}
+        last_update_times = {key: 0 for key in header}
+        last_write_time = time.time()
+        
+        # Write header if file doesn't exist
+        if not os.path.exists(csv_file):
+            try:
+                with open(csv_file, 'w', newline='') as f:
                     writer = csv.writer(f)
-                    writer.writerow([
-                        data['timestamp'],
-                        data.get('temperature', ''),
-                        data.get('humidity', ''),
-                        data.get('pressure', ''),
-                        data.get('uv_index', ''),
-                        data.get('co2', ''),
-                        data.get('pm2_5', ''),
-                        data.get('pm10', ''),
-                        data.get('wind_speed', ''),
-                        data.get('wind_dir_degrees', ''),
-                        data.get('rainfall', '')
-                    ])
-            except queue.Empty:
-                continue
+                    writer.writerow(header)
             except Exception as e:
-                self.log(f"CSV write error: {e}", logging.ERROR)
+                self.log(f"CSV header write error: {e}", logging.ERROR)
+        
+        while self.running:
+            current_time = time.time()
+            
+            # Process any new data
+            try:
+                while True:
+                    data = self.data_queue.get_nowait()
+                    if data:
+                        # Update values and their timestamps
+                        for key in data:
+                            if key in last_values:
+                                last_values[key] = data[key]
+                                last_update_times[key] = current_time
+                        # Always update the main timestamp
+                        last_values['timestamp'] = datetime.now().isoformat()
+                        last_update_times['timestamp'] = current_time
+            except queue.Empty:
+                pass
+            
+            # Check for stale data and set to None if timeout reached
+            for key in last_update_times:
+                if key != 'timestamp':  # Don't timeout the timestamp
+                    if current_time - last_update_times[key] > DATA_TIMEOUT:
+                        last_values[key] = None
+            
+            # Write if interval has elapsed
+            if current_time - last_write_time >= WRITE_INTERVAL:
+                try:
+                    with open(csv_file, 'a', newline='') as f:
+                        writer = csv.writer(f)
+                        writer.writerow([last_values[key] for key in header])
+                    last_write_time = current_time
+                    self.log(f"CSV write completed at {datetime.now().isoformat()}")
+                except PermissionError as e:
+                    self.log(f"CSV write permission error: {e}", logging.ERROR)
+                    time.sleep(5)
+                except Exception as e:
+                    self.log(f"CSV write error: {e}", logging.ERROR)
+            
+            time.sleep(1)  # Prevent CPU overload
 
     def get_datetime_info(self) -> dict:
         """Get formatted date/time information."""
